@@ -1,1 +1,11 @@
 
+numeric_vars <- ames %>% select(where(is.numeric))
+
+# 2. 计算相关系数矩阵
+cor_mat <- cor(numeric_vars, use = "pairwise.complete.obs")
+
+# 3. 取出每个变量与 Sale_Price 的相关性（按绝对值排序）
+cor_with_price <- sort(abs(cor_mat[, "Sale_Price"]), decreasing = TRUE)
+
+# 4. 打印前15个最相关的变量
+head(cor_with_price, 15)
